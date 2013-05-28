@@ -1,0 +1,65 @@
+GIT
+  remote: https://github.com/projectcypress/health-data-standards.git
+  revision: 781ea7a287935d62f35ecab683b92540a4ea2b66
+  branch: develop
+  specs:
+    health-data-standards (3.1.1)
+      activesupport (~> 3.2.9)
+      builder (~> 3.0.0)
+      erubis (~> 2.7.0)
+      log4r (~> 1.1.10)
+      memoist (~> 0.9.0)
+      mongoid (~> 3.1.0)
+      nokogiri (~> 1.5.5)
+      rest-client (~> 1.6.7)
+      rubyzip
+      uuid (~> 2.3.5)
+
+PATH
+  remote: .
+  specs:
+    summarize_codes (0.0.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    activemodel (3.2.13)
+      activesupport (= 3.2.13)
+      builder (~> 3.0.0)
+    activesupport (3.2.13)
+      i18n (= 0.6.1)
+      multi_json (~> 1.0)
+    builder (3.0.4)
+    erubis (2.7.0)
+    i18n (0.6.1)
+    log4r (1.1.10)
+    macaddr (1.6.1)
+      systemu (~> 2.5.0)
+    memoist (0.9.0)
+    mime-types (1.23)
+    mongoid (3.1.4)
+      activemodel (~> 3.2)
+      moped (~> 1.4)
+      origin (~> 1.0)
+      tzinfo (~> 0.3.22)
+    moped (1.5.0)
+    multi_json (1.7.4)
+    nokogiri (1.5.9)
+    origin (1.1.0)
+    rake (10.0.4)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
+    rubyzip (0.9.9)
+    systemu (2.5.2)
+    tzinfo (0.3.37)
+    uuid (2.3.7)
+      macaddr (~> 1.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (~> 1.3)
+  health-data-standards!
+  rake
+  summarize_codes!

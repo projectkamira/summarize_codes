@@ -47,7 +47,8 @@ module SummarizeCodes
       code = row[CODE_COLUMN]
       count = row[COUNT_COLUMN].to_i
       if count > 0
-        summary[code_system_oid][code] = count
+        summary[code_system_oid][code] ||= 0
+        summary[code_system_oid][code] += count
         # Map LOINC vitals to SNOMED
         if code_system_oid == LOINC_OID && LOINC_TO_SNOMED[code]
           summary[SNOMED_OID] ||= {}

@@ -7,7 +7,7 @@ namespace :codes do
     puts "Loading CSV from #{args.csv_dir}"
     
     summary = {}
-    Dir.glob(File.join(args.csv_dir, '*.csv')).each do |f|
+    Dir.glob(File.join(args.csv_dir, '**', '*.csv')).each do |f|
     	csv = CSV.read(f)
     	SummarizeCodes.validate_csv(csv)
     	SummarizeCodes.summarize_csv(csv,summary)
