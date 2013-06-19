@@ -41,12 +41,14 @@ module SummarizeCodes
   end
   
   def self.summarize_csv(rows, summary)
+    found_in_pass = {}
     rows[1..-1].each do |row|
       code_system_oid = SummarizeCodes.oid_for_code_system_name(row[CODE_SYSTEM_COLUMN])
       summary[code_system_oid] ||= {}
       code = row[CODE_COLUMN]
       count = row[COUNT_COLUMN].to_i
-      if count > 0
+      if !found_in_pass.include?(code)
+        found_in_pass[code] = true
         summary[code_system_oid][code] ||= 0
         summary[code_system_oid][code] += count
         # Map LOINC vitals to SNOMED
@@ -57,6 +59,33 @@ module SummarizeCodes
       end
     end
     summary
+  end
+  
+  def self.add_stats(summary)
+    summary.each do |oid, codes|
+      found = 0
+      not_found = 0
+      found_once = 0
+      found_five_or_less = 0
+      codes.values.each do |count|
+        if count <= 5 && count > 0
+          found_five_or_less+=1
+          if count==1
+            found_once+=1
+          end
+        end
+        if count == 0
+          not_found+=1
+        else
+          found+=1
+        end
+      end
+      codes['summary'] = {}
+      codes['summary']['found'] = found
+      codes['summary']['not_found'] = not_found
+      codes['summary']['found_once'] = found_once
+      codes['summary']['found_five_or_less'] = found_five_or_less
+    end
   end
 
 end

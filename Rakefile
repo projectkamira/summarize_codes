@@ -12,6 +12,7 @@ namespace :codes do
     	SummarizeCodes.validate_csv(csv)
     	SummarizeCodes.summarize_csv(csv,summary)
     end
+    SummarizeCodes.add_stats(summary)
     
     puts("Writing results to ./tmp")
     out_dir = File.join(".", "tmp")
@@ -20,6 +21,12 @@ namespace :codes do
     
     File.open(File.join(out_dir, "summary%s.json" % ts), 'w') do |f|
       f.write(JSON.pretty_generate(summary))
+    end
+    
+    summary.each do |oid, codes|
+    	name = HealthDataStandards::Util::CodeSystemHelper.code_system_for(oid)
+    	stats = codes['summary']
+    	puts "#{name}: #{stats['found']} #{stats['not_found']} #{stats['found_once']} #{stats['found_five_or_less']}"
     end
   end
 end
